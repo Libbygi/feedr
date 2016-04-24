@@ -50,7 +50,7 @@
           </div>
         </div>
         <section id="main" class="container">
-          <article class="article">
+          <!-- <article class="article">
             <section class="featuredImage">
               <img src="images/article_placeholder_1.jpg" alt="" />
             </section>
@@ -101,21 +101,21 @@
               526
             </section>
             <div class="clearfix"></div>
-          </article>
+          </article> -->
         </section>
 
         <script id = "article-template" type="text/x-handlebars-template">
 
         <article class="article">
           <section class="featuredImage">
-            <img src="images/article_placeholder_1.jpg" alt="" />
+            <img src="{{image}}" alt="" />
           </section>
           <section class="articleContent">
               <a href="{{url}}"><h3>{{title}}</h3></a>
-              <h6>{{subhed}}</h6>
+              <h6>{{category}}</h6>
           </section>
           <section class="impressions">
-            No. impressions
+            {{impressions}}
           </section>
           <div class="clearfix"></div>
           </article>
