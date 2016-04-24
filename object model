@@ -1,0 +1,36 @@
+API Paths
+
+photo
+category
+link
+title
+shares or something like that
+full version or summary of article
+date
+
+Mashable.new[i].
+  title: 'title'
+  link: 'url'
+  content.plain: 'whole story'
+  post_date: 'date'
+  shares.total: number
+  feature_image: 'url'
+  channel: 'category'
+
+  Reddit.data.children[i].
+    subreddit: 'subreddit'
+    permalink: 'links back to reddit'
+    title: 'title'
+    ups: 'ups'
+    media: NULL or, .oembed.thumbnail_url:'url'
+
+    date? text?
+
+  Digg.data.feed[i].
+    diggs.count: 'score'
+    title: 'title'
+    url:'url'
+    tags.name: return whatever tags are there
+    description: 'descrip'
+    date:
+    media.images[0].original_url: 'url'
