@@ -42,10 +42,8 @@
         <div id="popUp" class="loader hidden">
           <a href="#" class="closePopUp">X</a>
           <div class="container">
-            <h1>Article title here</h1>
-            <p>
-              Article description/content here.
-            </p>
+            <h1></h1>
+            <p></p>
             <a href="#" class="popUpAction" target="_blank">Read more from source</a>
           </div>
         </div>
@@ -106,12 +104,12 @@
 
         <script id = "article-template" type="text/x-handlebars-template">
 
-        <article class="article">
+        <article class="article" id ="{{id}}">
           <section class="featuredImage">
             <img src="{{image}}" alt="" />
           </section>
           <section class="articleContent">
-              <a href="{{url}}"><h3>{{title}}</h3></a>
+              <h3 class="title">{{title}}</h3>
               <h6>{{category}}</h6>
           </section>
           <section class="impressions">
