@@ -17,7 +17,6 @@ var $popUp = $('#popUp');
 window.onload = function(){
   $loader.removeClass('hidden');
   getReddit();
-
 };
 
 //listens for click on article to show popup

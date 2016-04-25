@@ -1,9 +1,9 @@
 //Menu Items: on click:
-  //update white box text
   //Show the blog clicked on, hide the others
   //get API url for that blog
 
 var $menu = $('#menu ul');
+var $body = $('body');
 var $menuSpan = $('#menu a span');
 var $mashable = $('#mashable');
 var $reddit = $('#reddit');
@@ -11,6 +11,7 @@ var $digg = $('#digg');
 
 var $loader = $('#popUp.loader');
 var $main = $('#main');
+var $article = $('.article');
 
 var $popUp = $('#popUp');
 var newArray = [];
@@ -90,6 +91,7 @@ function onRedditSuccess(response){
       newObj.image = image;
       newObj.author = author;
       newObj.id = id;
+      newObj.blog = 'Reddit';
 
       newArray.push(newObj);
   });
@@ -111,6 +113,20 @@ function onRedditSuccess(response){
 $menu.children().on('click' , function(){
   var sourceName = $(this).text();
   $menuSpan.html(sourceName);
+  // if (sourceName !=== 'Mashable'){
+  // }
+
+  if (sourceName === 'Reddit'){
+    $body.find('.Mashable','.Digg').addClass('hidden');
+    $body.find('.Reddit').removeClass('hidden');
+  } else if (sourceName === 'Mashable'){
+    $body.find('.Reddit','.Digg').addClass('hidden');
+    $body.find('.Mashable').removeClass('hidden');
+  } else if (sourceName === 'Reddit'){
+    $body.find('.Mashable','.Digg').addClass('hidden');
+    $body.find('.Reddit').removeClass('hidden');
+  }
+
 })
 
 // var article = {
