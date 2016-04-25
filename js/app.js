@@ -1,13 +1,6 @@
-//Menu Items: on click:
-  //Show the blog clicked on, hide the others
-  //get API url for that blog
-
 var $menu = $('#menu ul');
 var $body = $('body');
 var $menuSpan = $('#menu a span');
-var $mashable = $('#mashable');
-var $reddit = $('#reddit');
-var $digg = $('#digg');
 
 var $loader = $('#popUp.loader');
 var $main = $('#main');
@@ -105,27 +98,15 @@ function onRedditSuccess(response){
       })
 }
 
-//NEXT TO DO
-// make dropdown menu work
-// hook up the other two APIs
-
-//Changes News Source: XX to name of selected menu item
+//Dropdown menu
 $menu.children().on('click' , function(){
+  //Changes News Source: XX to name of selected menu item
   var sourceName = $(this).text();
   $menuSpan.html(sourceName);
-  // if (sourceName !=== 'Mashable'){
-  // }
 
-  if (sourceName === 'Reddit'){
-    $body.find('.Mashable','.Digg').addClass('hidden');
-    $body.find('.Reddit').removeClass('hidden');
-  } else if (sourceName === 'Mashable'){
-    $body.find('.Reddit','.Digg').addClass('hidden');
-    $body.find('.Mashable').removeClass('hidden');
-  } else if (sourceName === 'Reddit'){
-    $body.find('.Mashable','.Digg').addClass('hidden');
-    $body.find('.Reddit').removeClass('hidden');
-  }
+  //Shows or hides articles based on what is selected in dropdown
+  $body.find('.article').addClass('hidden');
+  $body.find('.' + sourceName).removeClass('hidden');
 
 })
 
