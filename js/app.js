@@ -14,6 +14,10 @@ var $main = $('#main');
 
 var $popUp = $('#popUp');
 var newArray = [];
+var $closePopUp = $('.closePopUp');
+var $popUpTitle = $('.popUpTitle');
+var $popUpSummary = $('.popUpSummary');
+var $popUpAction = $('.popUpAction');
 
 
 window.onload = function(){
@@ -23,28 +27,27 @@ window.onload = function(){
 
 //listens for click on article to show popup
 $main.on('click', '.article', function () {
-     console.log("click");
-     $popUp.removeClass('hidden loader');
-     $('.container h1').html('heres a title');
-     var clickedId = $(this).attr('id');
-     matchId(newArray, clickedId);
-
-
-    // function to check for matched ID
-
-    //  if (asd){
-    //
-    //   } else {
-    //  $('.container p').html('No summary is available.');
-    //   };
+   $popUp.removeClass('hidden loader');
+   var clickedId = $(this).attr('id');
+   matchId(newArray, clickedId);
 });
 
+$closePopUp.on('click', function(){
+  $popUp.addClass('hidden');
+})
+
+
+// function to check for matched ID and then pull appropriate info for popup
 function matchId(data, id){
   data.forEach(function(item){
      if (item.id === id){
-       console.log('match found:' + item.id)
-     } else {
-       $('.container p').html('No summary is available.');
+        $popUpTitle.html(item.title);
+        $popUpAction.attr('href', item.url);
+        if (item.content){
+          $popUpSummary.html(item.content);
+        } else {
+          $popUpSummary.html('No summary is available.');
+        }
      }
   })
 };
@@ -64,7 +67,6 @@ function onRedditSuccess(response){
   $loader.addClass('hidden');
 
   var allData = response.data.children;
-
 
   //Go through data from Reddit, pull out what we need, and create new objects that we append to newArray, in uniform format
   allData.forEach(function(item){
@@ -107,17 +109,12 @@ function onRedditSuccess(response){
 // make dropdown menu work
 // hook up the other two APIs
 
-// function pullInfo(data){
-//   var source = $('#article-template').html();
-//   var template = Handlebars.compile(source);
-//   $("#main").append(template(data));
-// };
 
-// $menu.children().on('click' , function(){
-//   console.log('childclicked');
-//   console.log($(this).text());
-//   $menuSpan.html('name of the thing');
-// })
+$menu.children().on('click' , function(){
+  console.log('childclicked');
+  console.log($(this).text());
+  $menuSpan.html('name of the thing');
+})
 
 // var article = {
 //   title: "jesse shawl won the lottery",
