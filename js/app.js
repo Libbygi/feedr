@@ -3,7 +3,7 @@
   //Show the blog clicked on, hide the others
   //get API url for that blog
 
-var $menu = $('#menu');
+var $menu = $('#menu ul');
 var $menuSpan = $('#menu a span');
 var $mashable = $('#mashable');
 var $reddit = $('#reddit');
@@ -103,17 +103,14 @@ function onRedditSuccess(response){
       })
 }
 
-
 //NEXT TO DO
-// add pop up to Main
 // make dropdown menu work
 // hook up the other two APIs
 
-
+//Changes News Source: XX to name of selected menu item
 $menu.children().on('click' , function(){
-  console.log('childclicked');
-  console.log($(this).text());
-  $menuSpan.html('name of the thing');
+  var sourceName = $(this).text();
+  $menuSpan.html(sourceName);
 })
 
 // var article = {
