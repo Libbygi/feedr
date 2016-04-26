@@ -10,15 +10,13 @@ var $closePopUp = $('.closePopUp');
 var $popUpTitle = $('.popUpTitle');
 var $popUpSummary = $('.popUpSummary');
 var $popUpAction = $('.popUpAction');
-var urlObj = {
-  reddit: 'https://www.reddit.com/top.json',
-  mashable: 'http://feedr-api.wdidc.org/mashable.json',
-  digg: 'http://feedr-api.wdidc.org/digg.json'
-}
+var redditUrl = 'https://www.reddit.com/top.json';
+var mashableUrl = 'http://feedr-api.wdidc.org/mashable.json';
+var diggUrl = 'http://feedr-api.wdidc.org/digg.json';
 
 window.onload = function(){
   $loader.removeClass('hidden');
-  callApi(urlObj.reddit);
+  getReddit();
 };
 
 //listens for click on article to show popup
@@ -47,14 +45,14 @@ function matchId(data, id){
   })
 };
 
-function callApi(endpoint) {
+function getReddit() {
     $.ajax({
-        url: endpoint,
+        url: redditUrl,
         method: "GET",
         dataType: "json",
         success: function (response) {
           onRedditSuccess(response);
-          //onMashableSuccess(response);
+          onMashableSuccess(response);
         }
     })
 };
@@ -102,14 +100,14 @@ function onRedditSuccess(response){
 //Dropdown menu
 $menu.children().on('click' , function(){
   //Changes News Source: XX to name of selected menu item
-  var sourceName = $(this).text().toLowerCase();
+  var sourceName = $(this).text();
   $menuSpan.html(sourceName);
 
   //Shows or hides articles based on what is selected in dropdown
   $body.find('.article').addClass('hidden');
   $body.find('.' + sourceName).removeClass('hidden');
-  callApi(urlObj[sourceName]);
 
+  getReddit();
 })
 
 // var article = {
@@ -120,4 +118,5 @@ $menu.children().on('click' , function(){
 //
 // var source = $('#article-template').html();
 // var template = Handlebars.compile(source);
+// //console.log(template(article));
 // $("#main").append(template(article));
