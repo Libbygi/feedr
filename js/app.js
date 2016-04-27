@@ -1,5 +1,8 @@
 var $menu = $('#menu ul');
 var $body = $('body');
+var $title = $('.title');
+var $searchIcon = $('#search a');
+var $searchContainer = $('#search');
 var $menuSpan = $('#menu a span');
 var $loader = $('#popUp.loader');
 var $main = $('#main');
@@ -9,8 +12,8 @@ var $closePopUp = $('.closePopUp');
 var $popUpTitle = $('.popUpTitle');
 var $popUpSummary = $('.popUpSummary');
 var $popUpAction = $('.popUpAction');
-var source = $('#article-template').html();
-var template = Handlebars.compile(source);
+var $source = $('#article-template').html();
+var template = Handlebars.compile($source);
 var newArray = [];
 var urlObj = {
   reddit: 'https://www.reddit.com/top.json',
@@ -18,13 +21,19 @@ var urlObj = {
   digg: 'http://feedr-api.wdidc.org/digg.json'
 }
 
-window.onload = function(){
+window.onload = function (){
   $loader.removeClass('hidden');
   callApi(urlObj.reddit);
 };
 
+//Homepage from logo
+$title.on('click', function(){
+  location.reload();
+})
+
 //Dropdown menu
 $menu.children().on('click' , function(){
+  $loader.removeClass('hidden');
   //Changes News Source: XX to name of selected menu item
   var sourceName = $(this).text().toLowerCase();
   $menuSpan.html(sourceName);
@@ -32,7 +41,7 @@ $menu.children().on('click' , function(){
   //Shows or hides articles based on what is selected in dropdown
   $body.find('.article').addClass('hidden');
   $body.find('.' + sourceName).removeClass('hidden');
-  //$loader.removeClass('hidden');
+  //a$loader.removeClass('hidden');
   callApi(urlObj[sourceName]);
 })
 
@@ -49,6 +58,9 @@ function callApi(endpoint) {
           } else if (endpoint === urlObj.digg){
             onDiggSuccess(response);
           }
+        },
+        error: function(){
+            alert('request failed');
         }
     })
 };
@@ -161,6 +173,21 @@ function matchId(data, id){
 $closePopUp.on('click', function(){
   $popUp.addClass('hidden');
 })
+
+//Search bar
+$searchIcon.on('click', function(){
+  $searchContainer.toggleClass('active');
+})
+
+if ($searchContainer.hasClass('active')){
+  $body.keypress(function(e) {
+      if(e.which == 13) {
+          $searchContainer.toggleClass('active');
+      }
+  });
+}
+
+
 
 
 // var article = {
